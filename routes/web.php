@@ -120,8 +120,14 @@ return "page-1";
 Route::get('login', function() {
 return "login";
 })->name('login');
-Route::get('page-2', function() {
-return "page-2";
+Route::get('get-secure-info', function(Request $request) {
+$key= $request['key'];
+$info=['info'=>'valid key'];
+if ($key==123456) {
+    return response($info)->header('content-type','application/json');
+}else{
+    return response(content:['invalid key'], status:200)->header('content-type','application/json');
+}
 });
 Route::get('page-3', function() {
 return "page-3";
