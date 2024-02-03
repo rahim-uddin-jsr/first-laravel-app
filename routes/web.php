@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -121,7 +122,13 @@ return "page-2";
 Route::get('page-3', function() {
 return "page-3";
 });
-Route::get('page-4', function() {
+Route::get('page-4', function(Request $request) {
+    // dd($request->all());
+    // dd($request->input());
+    // dd($request->all());
+    dd($request->collect());
+    // dd($request->all()['search']);
+
 return "page-4";
 });
 });
