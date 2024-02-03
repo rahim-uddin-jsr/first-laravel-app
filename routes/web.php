@@ -109,3 +109,19 @@ Route::get('/search/{search_param}', function($search_param) {
 Route::get('downloads', function () {
     return response()->download(public_path('/files-posd.pdf'),'pos application.pdf');
 });
+
+
+Route::prefix('page')->name('laravel.')->group(function() {
+Route::get('page-1', function() {
+return "page-1";
+});
+Route::get('page-2', function() {
+return "page-2";
+});
+Route::get('page-3', function() {
+return "page-3";
+});
+Route::get('page-4', function() {
+return "page-4";
+});
+});
