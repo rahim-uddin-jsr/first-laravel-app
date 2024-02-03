@@ -112,16 +112,20 @@ Route::get('downloads', function () {
 });
 
 
+
 Route::prefix('page')->name('laravel.')->group(function() {
 Route::get('page-1', function() {
 return "page-1";
 });
+Route::get('login', function() {
+return "login";
+})->name('login');
 Route::get('page-2', function() {
 return "page-2";
 });
 Route::get('page-3', function() {
 return "page-3";
-});
+})->middleware('auth');
 Route::get('page-4', function(Request $request) {
     // dd($request->all());
     // dd($request->input());
