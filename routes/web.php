@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\GetInfoWithSequrityKey;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,15 +47,7 @@ Route::get('users', [UserController::class,'getUsers']);
 Route::get('login', function() {
 return "login";
 })->name('login');
-Route::get('get-secure-info', function(Request $request) {
-$key= $request['key'];
-$info=['info'=>'valid key'];
-if ($key==123456) {
-    return response()->json($info)->header('content-type','application/json');
-}else{
-    return response()->json(['status'=>'invalid key'], 200)->header('Content-Type', 'application/json');
-}
-});
+Route::get('get-secure-info', GetInfoWithSequrityKey::class);
 Route::get('page-3', function() {
 return "page-3";
 })->middleware('auth');

@@ -16,6 +16,7 @@ class FrontController extends Controller
     function contactUs() {
         return view('contact',['page_name'=> 'Contact']);
     }
+
     function Services() {
         $page_name='Services';
         $products = [
