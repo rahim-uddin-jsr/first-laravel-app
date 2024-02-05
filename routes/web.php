@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GetInfoWithSequrityKey;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,7 @@ Route::get('downloads', function () {
 
 Route::prefix('page')->name('laravel.')->group(function() {
 Route::get('users', [UserController::class,'getUsers']);
+Route::resource('post',PostController::class);
 Route::get('login', function() {
 return "login";
 })->name('login');
