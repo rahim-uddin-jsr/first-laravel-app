@@ -22,8 +22,8 @@ class CategoryStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_name'=>'required|string|alpha',
-            'category_slug'=>'required|string|alpha',
+           'category_name'=>'required',
+            // 'category_slug'=>'required|string|alpha',
             'is_active'=>'nullable',
         ];
     }
