@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -11,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -27,7 +28,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate([
+            'category_name'=>'required|string|alpha',
+            'category_slug'=>'required|string|alpha',
+            'is_active'=>'nullable',
+        ]);
+        Category::create([
+            'name'=>$request->category_name,
+            'slug'=>$request->category_slug,
+            'is_active'=>$request->filled('is_active'),
+        ]);
+        // dd($request->category_name,$request->category_slug,$request->filled('is_active'));
+        return back();
     }
 
     /**

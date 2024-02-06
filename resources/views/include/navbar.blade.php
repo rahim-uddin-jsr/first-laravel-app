@@ -18,6 +18,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">Services</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}" href="/page/category">Create Category</a>
+                </li>
 
             </ul>
 

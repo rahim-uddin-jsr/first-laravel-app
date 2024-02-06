@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GetInfoWithSequrityKey;
 use App\Http\Controllers\PostController;
@@ -42,8 +43,8 @@ Route::get('downloads', function () {
 });
 
 
-
 Route::prefix('page')->name('laravel.')->group(function() {
+Route::resource('category', CategoryController::class);
 Route::get('users', [UserController::class,'getUsers']);
 Route::resource('post',PostController::class);
 Route::get('login', function() {
