@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GetInfoWithSequrityKey;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::get('downloads', function () {
 
 Route::prefix('page')->name('laravel.')->group(function() {
 Route::resource('category', CategoryController::class);
+Route::resource('subcategory', SubCategoryController::class);
 Route::get('users', [UserController::class,'getUsers']);
 Route::resource('post',PostController::class);
 Route::get('login', function() {

@@ -21,6 +21,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}" href="/page/category">Create Category</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('subcategoryCreate') ? 'active' : '' }}" href="/page/subcategory/create">Create Subcategory</a>
+                </li>
 
             </ul>
 

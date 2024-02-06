@@ -15,7 +15,7 @@
                 <label for="category-name" class="form-label">Category Name</label>
                 <input type="text" class="form-control @error('category_name')
                     is-invalid
-                @enderror" id="category-name" name="category_name" placeholder="Please provide Category name">
+                @enderror" id="category-name" name="category_name" placeholder="Please provide Subcategory name">
                 @error('category_name')
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
