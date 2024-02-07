@@ -6,6 +6,9 @@
 
 <div class="row">
     <div class="col-8 m-auto">
+        <div class="d-flex justify-content-start my-4">
+            <a href="{{ route('laravel.subcategory.index') }}" class="btn btn-primary text-right">Subcatogory</a>
+        </div>
         @if (session('status'))
             <div class="alert alert-success">{{ session('status') }}</div>
         @endif
@@ -14,7 +17,7 @@
             <div class="mb-3">
                 <select class="form-select my-3 @error('selected_category_id')
                 is-invalid
-            @enderror" name="selected_category_id" >
+            @enderror" name="selected_category_id">
                     <option selected value="">Select a Category</option>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubCatecoryUpdateRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
@@ -16,7 +17,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $subcategories=SubCategory::get(['id','category_id','name','created_at']);
+        return view('subcategory.index', compact('subcategories'));
     }
 
     /**
@@ -57,15 +59,26 @@ class SubCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories= Category::get(['id','name']);
+        $selectedSubcategory=SubCategory::find($id);
+        return view('subcategory.edit',compact('categories','selectedSubcategory'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SubcategoryStoreRequest $request, string $id)
     {
-        //
+        $selectedSubcategory=SubCategory::find($id);
+        $selectedSubcategory->update([
+            'category_id'=>$request->selected_category_id,
+            'name'=>$request->subcategory_name,
+            'slug'=>Str::slug($request->subcategory_name),
+            'is_active'=>$request->filled('is_active'),
+        ]);
+        // dd($request->category_name,$request->category_slug,$request->filled('is_active'));
+        Session::flash('status','Subcategory Updated successfully');
+        return redirect()->route('laravel.subcategory.index');
     }
 
     /**
@@ -73,6 +86,8 @@ class SubCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        SubCategory::find($id)->delete();
+        Session::flash('status', 'SubCategory deleted successfully!');
+        return redirect()->route('laravel.subcategory.index');
     }
 }
