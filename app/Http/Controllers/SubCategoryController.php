@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\SubcategoryStoreRequest;
+use Brian2694\Toastr\Facades\Toastr;
 
 class SubCategoryController extends Controller
 {
@@ -77,7 +78,8 @@ class SubCategoryController extends Controller
             'is_active'=>$request->filled('is_active'),
         ]);
         // dd($request->category_name,$request->category_slug,$request->filled('is_active'));
-        Session::flash('status','Subcategory Updated successfully');
+        Toastr()->success('Subcategory Updated successfully', 'Updated!', ["positionClass" => "toast-top-right"]);
+        // Session::flash('status','Subcategory Updated successfully');
         return redirect()->route('laravel.subcategory.index');
     }
 

@@ -22,7 +22,6 @@
     <div class="container">
         @yield('content')
     </div>
-
     @include('include.scripts')
 </body>
 
