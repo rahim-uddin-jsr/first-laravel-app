@@ -33,7 +33,7 @@
                         <form action="{{ route('laravel.subcategory.destroy', ['subcategory' => $subcategory->id]) }}" method="post">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                            <button type="submit" class="btn btn-danger btn-sm show-confirm">Del</button>
                         </form>
                     </td>
                   </tr>
