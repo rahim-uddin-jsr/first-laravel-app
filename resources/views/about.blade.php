@@ -1,5 +1,5 @@
 @extends('master')
-@section('page_title','About Page')
+@section('page_title','About')
 
 @section('content')
 @if ($page_name==true)
