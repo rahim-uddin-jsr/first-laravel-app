@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.create');
+        $categories = Category::all();
+        return view('categories.category', ['categories' => $categories]);
     }
 
     /**
@@ -23,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -37,12 +38,12 @@ class CategoryController extends Controller
         //     'is_active'=>'nullable',
         // ]);
         Category::create([
-            'name'=>$request->category_name,
-            'slug'=>Str::slug($request->category_name),
-            'is_active'=>$request->filled('is_active'),
+            'name' => $request->category_name,
+            'slug' => Str::slug($request->category_name),
+            'is_active' => $request->filled('is_active'),
         ]);
         // dd($request->category_name,$request->category_slug,$request->filled('is_active'));
-        Session::flash('status','category created successfully');
+        Session::flash('status', 'category created successfully');
         return back();
     }
 
@@ -60,6 +61,8 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         //
+        $category = Category::find($id);
+        return view('categories.edit',  compact('category'));
     }
 
     /**
@@ -67,7 +70,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::find($id);
+        $category->update([
+            'name' => $request->category_name,
+            'slug' => Str::slug($request->category_name),
+            'is_active' => $request->filled('is_active')
+        ]);
+
+        Session::flash('status', 'Category updated successfully!');
+        return back();
     }
 
     /**
@@ -75,6 +86,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id)->delete();
+        Session::flash('status', 'Category deleted successfully!');
+        return back();
     }
 }

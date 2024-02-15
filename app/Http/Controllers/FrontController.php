@@ -10,8 +10,8 @@ class FrontController extends Controller
     //
     function home()
     {
-        $users = User::where('created_at', '<=', now())->get();
-        // $users = User::with('nidcard')->get();
+        // $users = User::where('created_at', '<=', now())->get();
+        $users = User::with('nidcard')->get();
         return view('home', ["page_name" => "Home", "users" => $users]);
     }
     function about()
