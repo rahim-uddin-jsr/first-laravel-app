@@ -45,6 +45,6 @@ class User extends Authenticatable
     ];
     public function nidcard()
     {
-        return $this->belongsTo(NidCard::class);
+        return $this->hasOne(NidCard::class);
     }
 }

@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     //
-    function home() {
-        return view('home',["page_name"=>"Home"]);
+    function home()
+    {
+        $users = User::where('created_at', '<=', now())->get();
+        // $users = User::with('nidcard')->get();
+        return view('home', ["page_name" => "Home", "users" => $users]);
     }
-    function about() {
-        return view('about',['page_name'=> 'About']);
+    function about()
+    {
+        return view('about', ['page_name' => 'About']);
     }
-    function contactUs() {
-        return view('contact',['page_name'=> 'Contact']);
+    function contactUs()
+    {
+        return view('contact', ['page_name' => 'Contact']);
     }
 
-    function Services() {
-        $page_name='Services';
+    function Services()
+    {
+        $page_name = 'Services';
         $products = [
             1 => [
                 'name' => 'Bag',
@@ -82,12 +89,16 @@ class FrontController extends Controller
             ],
         ];
         // return redirect('/');
-    return response($products)
-    ->header("Content-Type", "application/json")
-    ->cookie('name', '', time() - 1);
+        return response($products)
+            ->header("Content-Type", "application/json")
+            ->cookie('name', '', time() - 1);
         // return view('services', compact('page_name', 'products'));
     }
-    function home1() {
-        return view('home',["page_name"=>"Home"]);
+    function home1()
+    {
+        $users = User::where('created_at', '<=', now())->get();
+        // $users = User::with('nidcard')->get();
+        return $users;
+        return view('home', ["page_name" => "Home"]);
     }
 }
