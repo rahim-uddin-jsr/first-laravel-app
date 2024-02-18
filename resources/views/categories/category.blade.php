@@ -16,6 +16,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Category Name</th>
+                        <th scope="col">Subcategories</th>
                         <th scope="col">Created</th>
                         <th class="text-center" scope="col">Action</th>
                     </tr>
@@ -27,6 +28,7 @@
                             <th scope="row">{{ $count }}</th>
                             {{ $count++ }}
                             <td>{{ $category->name }}</td>
+                            <td>{{ $category->subcategories_count }}</td>
                             <td>{{ $category->created_at->diffForHumans() }}</td>
 
                             <td class="d-flex w-100 justify-content-center gap-2">

@@ -18,7 +18,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $subcategories=SubCategory::get(['id','category_id','name','created_at']);
+        $subcategories = SubCategory::with('category')->get(['id', 'category_id', 'name', 'created_at',]);
         return view('subcategory.index', compact('subcategories'));
     }
 
@@ -27,8 +27,8 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $categories= Category::get(['id','name']);
-        return view('subcategory.create',compact('categories'));
+        $categories = Category::get(['id', 'name']);
+        return view('subcategory.create', compact('categories'));
     }
 
     /**
@@ -37,13 +37,13 @@ class SubCategoryController extends Controller
     public function store(SubcategoryStoreRequest $request)
     {
         SubCategory::create([
-            'category_id'=>$request->selected_category_id,
-            'name'=>$request->subcategory_name,
-            'slug'=>Str::slug($request->subcategory_name),
-            'is_active'=>$request->filled('is_active'),
+            'category_id' => $request->selected_category_id,
+            'name' => $request->subcategory_name,
+            'slug' => Str::slug($request->subcategory_name),
+            'is_active' => $request->filled('is_active'),
         ]);
         // dd($request->category_name,$request->category_slug,$request->filled('is_active'));
-        Session::flash('status','Subcategory created successfully');
+        Session::flash('status', 'Subcategory created successfully');
         return back();
     }
 
@@ -60,9 +60,9 @@ class SubCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $categories= Category::get(['id','name']);
-        $selectedSubcategory=SubCategory::find($id);
-        return view('subcategory.edit',compact('categories','selectedSubcategory'));
+        $categories = Category::get(['id', 'name']);
+        $selectedSubcategory = SubCategory::find($id);
+        return view('subcategory.edit', compact('categories', 'selectedSubcategory'));
     }
 
     /**
@@ -70,12 +70,12 @@ class SubCategoryController extends Controller
      */
     public function update(SubcategoryStoreRequest $request, string $id)
     {
-        $selectedSubcategory=SubCategory::find($id);
+        $selectedSubcategory = SubCategory::find($id);
         $selectedSubcategory->update([
-            'category_id'=>$request->selected_category_id,
-            'name'=>$request->subcategory_name,
-            'slug'=>Str::slug($request->subcategory_name),
-            'is_active'=>$request->filled('is_active'),
+            'category_id' => $request->selected_category_id,
+            'name' => $request->subcategory_name,
+            'slug' => Str::slug($request->subcategory_name),
+            'is_active' => $request->filled('is_active'),
         ]);
         // dd($request->category_name,$request->category_slug,$request->filled('is_active'));
         Toastr()->success('Subcategory Updated successfully', 'Updated!', ["positionClass" => "toast-top-right"]);
