@@ -27,6 +27,7 @@ Route::get('/services-page', [FrontController::class, 'services'])->name('servic
 Route::get('/book', [FrontController::class, 'books']);
 Route::get('/publishers', [FrontController::class, 'publishers']);
 Route::get('/authors', [FrontController::class, 'authors']);
+Route::get('/booktypes', [FrontController::class, 'booktypes']);
 
 
 Route::get('/users/{user_id}', function ($user_id) {

@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
+    public function publisher()
+    {
+        return $this->belongsTo(Publisher::class);
+    }
+    function booktype()
+    {
+        return $this->belongsTo(BooksType::class, 'books_type_id', 'id');
+    }
 }

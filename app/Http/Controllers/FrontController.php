@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\BooksType;
 use App\Models\Publisher;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -106,8 +107,13 @@ class FrontController extends Controller
     }
     function books()
     {
-        $books = Book::get();
+        $books = Book::with(['publisher', 'author', 'booktype'])->get();
         return $books;
+    }
+    function booktypes()
+    {
+        $bookTypes = BooksType::get();
+        return $bookTypes;
     }
     function publishers()
     {
