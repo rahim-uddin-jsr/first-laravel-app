@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use App\Models\Book;
+use App\Models\Publisher;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -100,5 +103,20 @@ class FrontController extends Controller
         // $users = User::with('nidcard')->get();
         return $users;
         return view('home', ["page_name" => "Home"]);
+    }
+    function books()
+    {
+        $books = Book::get();
+        return $books;
+    }
+    function publishers()
+    {
+        $publishers = Publisher::get();
+        return $publishers;
+    }
+    function authors()
+    {
+        $authors = Author::get();
+        return $authors;
     }
 }

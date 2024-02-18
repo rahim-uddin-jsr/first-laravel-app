@@ -20,10 +20,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[FrontController::class,'home'])->name('home');
-Route::get('/about-us', [FrontController::class,'about'])->name('about');
-Route::get('/contact-us', [FrontController::class,'contactUs'])->name('contact');
-Route::get('/services-page',[FrontController::class,'services'])->name('services');
+Route::get('/', [FrontController::class, 'home'])->name('home');
+Route::get('/about-us', [FrontController::class, 'about'])->name('about');
+Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('contact');
+Route::get('/services-page', [FrontController::class, 'services'])->name('services');
+Route::get('/book', [FrontController::class, 'books']);
+Route::get('/publishers', [FrontController::class, 'publishers']);
+Route::get('/authors', [FrontController::class, 'authors']);
 
 
 Route::get('/users/{user_id}', function ($user_id) {
@@ -31,38 +34,38 @@ Route::get('/users/{user_id}', function ($user_id) {
     return $user_id;
 })->name('users')->where(['user_id' => '[0-9]+']);
 
-Route::get('/category/{category_name}', function ($category_name){
+Route::get('/category/{category_name}', function ($category_name) {
     echo $category_name;
 })->whereIn('category_name', ['electronics', 'movie', 'books', 'watch', 'laptop']);
 
-Route::get('/search/{search_param}', function($search_param) {
+Route::get('/search/{search_param}', function ($search_param) {
     echo "$search_param";
-})-> where('search_param', '.*');
+})->where('search_param', '.*');
 
 Route::get('downloads', function () {
-    return response()->download(public_path('/files-posd.pdf'),'pos application.pdf');
+    return response()->download(public_path('/files-posd.pdf'), 'pos application.pdf');
 });
 
 
-Route::prefix('page')->name('laravel.')->group(function() {
-Route::resource('category', CategoryController::class);
-Route::resource('subcategory', SubCategoryController::class);
-Route::get('users', [UserController::class,'getUsers']);
-Route::resource('post',PostController::class);
-Route::get('login', function() {
-return "login";
-})->name('login');
-Route::get('get-secure-info', GetInfoWithSequrityKey::class);
-Route::get('page-3', function() {
-return "page-3";
-})->middleware('auth');
-Route::get('page-4', function(Request $request) {
-    // dd($request->all());
-    // dd($request->input());
-    // dd($request->all());
-    dd($request->collect());
-    // dd($request->all()['search']);
+Route::prefix('page')->name('laravel.')->group(function () {
+    Route::resource('category', CategoryController::class);
+    Route::resource('subcategory', SubCategoryController::class);
+    Route::get('users', [UserController::class, 'getUsers']);
+    Route::resource('post', PostController::class);
+    Route::get('login', function () {
+        return "login";
+    })->name('login');
+    Route::get('get-secure-info', GetInfoWithSequrityKey::class);
+    Route::get('page-3', function () {
+        return "page-3";
+    })->middleware('auth');
+    Route::get('page-4', function (Request $request) {
+        // dd($request->all());
+        // dd($request->input());
+        // dd($request->all());
+        dd($request->collect());
+        // dd($request->all()['search']);
 
-return "page-4";
-});
+        return "page-4";
+    });
 });
