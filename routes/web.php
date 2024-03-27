@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GetInfoWithSequrityKey;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,11 @@ Route::get('/book', [FrontController::class, 'books']);
 Route::get('/publishers', [FrontController::class, 'publishers']);
 Route::get('/authors', [FrontController::class, 'authors']);
 Route::get('/booktypes', [FrontController::class, 'booktypes']);
+Route::get('/blog-posts', [BlogPostController::class, 'index']);
+Route::get('/blog-posts/{id}', [BlogPostController::class, 'show']);
+Route::delete('/blog-posts/delete/{id}', [BlogPostController::class, 'destroy'])->name("Destroy BLOG POST");
+Route::delete('/blog-posts/destroy/{id}', [BlogPostController::class, 'destroyTrashSingleBlog'])->name('DELETE SOFT DELETED SINGLE BLOG POST');
+Route::put('/blog-posts/restore/{id}', [BlogPostController::class, 'restore'])->name('RESTORE SOFT DELETED BLOG POST');
 
 
 Route::get('/users/{user_id}', function ($user_id) {
