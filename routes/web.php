@@ -30,7 +30,7 @@ Route::get('/book', [FrontController::class, 'books']);
 Route::get('/publishers', [FrontController::class, 'publishers']);
 Route::get('/authors', [FrontController::class, 'authors']);
 Route::get('/booktypes', [FrontController::class, 'booktypes']);
-Route::get('/blog-posts', [BlogPostController::class, 'index']);
+Route::get('/blog-posts', [BlogPostController::class, 'index'])->name('blog post');
 Route::get('/blog-posts/{id}', [BlogPostController::class, 'show']);
 Route::delete('/blog-posts/delete/{id}', [BlogPostController::class, 'destroy'])->name("Destroy BLOG POST");
 Route::delete('/blog-posts/destroy/{id}', [BlogPostController::class, 'destroyTrashSingleBlog'])->name('DELETE SOFT DELETED SINGLE BLOG POST');

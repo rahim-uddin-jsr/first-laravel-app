@@ -24,12 +24,16 @@
                         href="{{ route('services') }}">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->routeIs('laravel.category.index') ? 'active' : '' }}"
                         href="/page/category">Category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('subcategoryCreate') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->routeIs('laravel.subcategory.index') ? 'active' : '' }}"
                         href="/page/subcategory">Subcategory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('blog post') ? 'active' : '' }}" href="/blog-posts">Blog
+                        Posts</a>
                 </li>
 
             </ul>
