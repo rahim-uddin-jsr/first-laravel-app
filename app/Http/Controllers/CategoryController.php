@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryStoreRequest;
+use App\Mail\CategoryCreated;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -37,12 +40,20 @@ class CategoryController extends Controller
         //     'category_slug'=>'required|string|alpha',
         //     'is_active'=>'nullable',
         // ]);
-        Category::create([
+        $category = Category::create([
             'name' => $request->category_name,
             'slug' => Str::slug($request->category_name),
             'is_active' => $request->filled('is_active'),
         ]);
         // dd($request->category_name,$request->category_slug,$request->filled('is_active'));
+
+        // mail send command
+        $user = User::find(1);
+        Mail::to($user)->send(
+            new CategoryCreated($category),
+        );
+
+
         Session::flash('status', 'category created successfully');
         return back();
     }
